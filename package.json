@@ -19,7 +19,7 @@
         "format:fix": "prettier . --write",
         "format:check": "prettier . --check",
         "lint:check": "eslint .",
-        "lint:fix": "eslint .--fix",
+        "lint:fix": "eslint . --fix",
         "prepare": "husky"
     },
     "devDependencies": {
