@@ -1,0 +1,20 @@
+{
+  "name": "auth-service",
+  "version": "1.0.0",
+  "description": "The user management service",
+  "homepage": "https://github.com/raju6991/mernspace-c-auth-service#readme",
+  "bugs": {
+    "url": "https://github.com/raju6991/mernspace-c-auth-service/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raju6991/mernspace-c-auth-service.git"
+  },
+  "license": "ISC",
+  "author": "Raju Lamsal",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node src/server.js"
+  }
+}
