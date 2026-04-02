@@ -1,5 +1,3 @@
-function welcome(name: string) {
-    return name
-}
+import { Config } from './config'
 
-welcome('Raju')
+console.log(Config.PORT)
