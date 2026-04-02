@@ -16,5 +16,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "node src/server.js"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "typescript": "^6.0.2"
   }
 }
