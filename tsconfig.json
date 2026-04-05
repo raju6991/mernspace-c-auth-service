@@ -16,5 +16,10 @@
         "ignoreDeprecations": "5.0",
         "types": ["jest", "node"]
     },
-    "include": ["src/**/*.ts", "app.spec.ts", "jest.config.ts"]
+    //TypeOrm
+
+    "emitDecoratorMetaData": true,
+    "expeirmentalDecorators": true,
+
+    "include": ["src/**/*.ts", "tests/**/*.ts", "app.spec.ts", "jest.config.ts"]
 }
