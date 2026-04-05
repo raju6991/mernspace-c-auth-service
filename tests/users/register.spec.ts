@@ -1,6 +1,24 @@
 import request from 'supertest'
 import app from '../../src/app'
+import { User } from '../../src/entity/User'
+import { DataSource } from 'typeorm'
+import { AppDataSource } from '../../src/config/data-source'
+import { turncateTables } from '../utils'
 describe('POST /auth/register', () => {
+    let connection: DataSource
+
+    beforeAll(async () => {
+        connection = await AppDataSource.initialize()
+    })
+
+    beforeEach(async () => {
+        // Database truncate
+        await turncateTables(connection)
+    })
+    afterAll(async () => {
+        await connection.destroy()
+    })
+
     describe('Given all fields', () => {
         it('should return the 201 status code', async () => {
             // Arrange
@@ -48,6 +66,13 @@ describe('POST /auth/register', () => {
         //Act
         await request(app).post('/auth/register').send(userData)
         // Assert
+        const userRespository = connection.getRepository(User)
+
+        const users = await userRespository.find()
+        expect(users).toHaveLength(1)
+        expect(users[0].firstName).toBe(userData.firstName)
+        expect(users[0].lastName).toBe(userData.lastName)
+        expect(users[0].email).toBe(userData.email)
     })
     describe('Fields are missing', () => {})
 })
