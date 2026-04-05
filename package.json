@@ -20,7 +20,7 @@
         "lint:check": "eslint .",
         "lint:fix": "eslint . --fix",
         "test": "jest",
-        "test:watch": "jest --watch --watchAll=false --runInBand",
+        "test:watch": "jest --watch --watchAll=true --runInBand",
         "prepare": "husky"
     },
     "devDependencies": {
@@ -53,6 +53,9 @@
         "dotenv": "^17.4.0",
         "express": "^5.2.1",
         "http-errors": "^2.0.1",
+        "pg": "^8.20.0",
+        "reflect-metadata": "^0.2.2",
+        "typeorm": "^0.3.28",
         "winston": "^3.19.0"
     }
 }
