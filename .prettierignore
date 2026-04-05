@@ -1,5 +1,7 @@
 # Ignore artifacts
-
+build
+tsconfig.json
+package.json
+package-lock.json
 dist
-
 coverage
