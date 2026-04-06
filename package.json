@@ -25,6 +25,7 @@
     },
     "devDependencies": {
         "@eslint/js": "^10.0.1",
+        "@types/bcrypt": "^6.0.0",
         "@types/express": "^5.0.6",
         "@types/http-errors": "^2.0.5",
         "@types/jest": "^30.0.0",
@@ -51,8 +52,10 @@
         ]
     },
     "dependencies": {
+        "bcrypt": "^6.0.0",
         "dotenv": "^17.4.0",
         "express": "^5.2.1",
+        "express-validator": "^7.3.2",
         "http-errors": "^2.0.1",
         "pg": "^8.20.0",
         "reflect-metadata": "^0.2.2",
