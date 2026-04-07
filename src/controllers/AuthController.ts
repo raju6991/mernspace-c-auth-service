@@ -1,5 +1,5 @@
 import { NextFunction, Response } from 'express'
-import { RegisterUserRequest } from '../types'
+import { AuthRequest, RegisterUserRequest } from '../types'
 import { UserService } from '../services/UserService'
 import { Logger } from 'winston'
 import { JwtPayload } from 'jsonwebtoken'
@@ -151,5 +151,11 @@ export class AuthController {
             next(err)
             return
         }
+    }
+
+    async self(req: AuthRequest, res: Response) {
+        // token req.auth.id using middleware
+        const user = await this.userService.findById(Number(req.auth.sub))
+        res.json({ ...user, password: undefined })
     }
 }
