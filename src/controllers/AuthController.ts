@@ -8,6 +8,8 @@ import { JwtPayload, sign } from 'jsonwebtoken'
 import { validationResult } from 'express-validator'
 import createHttpError from 'http-errors'
 import { Config } from '../config'
+import { AppDataSource } from '../config/data-source'
+import { RefreshToken } from '../entity/RefreshToken'
 
 export class AuthController {
     constructor(
@@ -63,13 +65,21 @@ export class AuthController {
                 expiresIn: '1h',
                 issuer: 'auth-service',
             })
+            // Persist the refresh token
+            const MS_IN_Year = 1000 * 60 * 60 * 24 * 365 //1Y->(Leap year not included)
+            const refreshToeknRepository =
+                AppDataSource.getRepository(RefreshToken)
+            const newRefreshToken = await refreshToeknRepository.save({
+                user: user,
+                expiresAt: new Date(Date.now() + MS_IN_Year),
+            })
 
             const refreshToken = sign(payload, Config.REFRESH_TOKEN_SECRET!, {
                 algorithm: 'HS256',
                 expiresIn: '1y',
                 issuer: 'auth-service',
+                jwtid: String(newRefreshToken.id),
             })
-
             res.cookie('accessToken', accessToken, {
                 domain: 'localhost',
                 sameSite: 'strict',
