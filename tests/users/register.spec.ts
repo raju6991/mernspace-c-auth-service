@@ -340,7 +340,7 @@ describe('POST /auth/register', () => {
             const userData = {
                 firstName: 'Raju',
                 lastName: 'Lamsal',
-                email: 'rajulamsal@gmil.com',
+                email: 'rajulamsal@gmail.com',
                 password: 'pass', // less than 8 chars
             }
             // Act
