@@ -24,3 +24,7 @@ export type AuthCookie = {
 export interface RegisterUserRequest extends Request {
     body: UserData
 }
+
+export interface IRefreshTokenPayload {
+    id: string
+}
