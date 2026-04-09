@@ -21,7 +21,10 @@
         "lint:fix": "eslint . --fix",
         "test": "jest",
         "test:watch": "jest --watch --watchAll=true --runInBand",
-        "prepare": "husky"
+        "prepare": "husky",
+        "migration:generate": "typeorm-ts-node-commonjs migration:generate",
+        "migration:run": "typeorm-ts-node-commonjs migration:run",
+        "migration:create": "typeorm-ts-node-commonjs migration:create"
     },
     "devDependencies": {
         "@eslint/js": "^10.0.1",
