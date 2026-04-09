@@ -91,7 +91,6 @@ describe('GET /auth/self', () => {
                 .get('/auth/self')
                 .set('Cookie', [`accessToken=${accessToken}`])
                 .send()
-            console.log(response.body)
             //Assert
             //Check if user id matches with registered user
             expect(
