@@ -23,8 +23,8 @@
         "test:watch": "jest --watch --watchAll=true --runInBand",
         "prepare": "husky",
         "migration:generate": "typeorm-ts-node-commonjs migration:generate -d src/config/data-source.ts",
-        "migration:run": "typeorm-ts-node-commonjs migration:run -d src/config/data-source.ts",
-        "migration:create": "typeorm-ts-node-commonjs migration:create -d src/config/data-source.ts"
+        "migration:create": "typeorm-ts-node-commonjs migration:create",
+        "migration:run": "typeorm-ts-node-commonjs migration:run -d src/config/data-source.ts"
     },
     "devDependencies": {
         "@eslint/js": "^10.0.1",
