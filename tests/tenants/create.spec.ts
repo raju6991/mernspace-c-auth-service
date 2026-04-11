@@ -84,7 +84,7 @@ describe('POST /tenants', () => {
             expect(tenants).toHaveLength(0)
         })
 
-        it('should return 403 if user is not an admin', async () => {
+        it('should return 40 status code if user is not an admin', async () => {
             const managerToken = jwks.token({
                 sub: '1',
                 role: Roles.MANAGER,
@@ -104,6 +104,47 @@ describe('POST /tenants', () => {
             const tenantRepository = connection.getRepository(Tenant)
             const tenants = await tenantRepository.find()
 
+            expect(tenants).toHaveLength(0)
+        })
+    })
+
+    describe('Fields are missing', () => {
+        it('should return 400 status code  if name is missing', async () => {
+            //Arrange
+            const tenantData = {
+                name: '',
+                address: 'Tenant address',
+            }
+            //Act
+            const response = await request(app)
+                .post('/tenants')
+                .set('Cookie', [`accessToken=${adminToken}`])
+                .send(tenantData)
+
+            expect(response.statusCode).toBe(400)
+
+            // Assert that no tenant was created
+            const tenantRepository = connection.getRepository(Tenant)
+            const tenants = await tenantRepository.find()
+            expect(tenants).toHaveLength(0)
+        })
+        it('should return 400 status code  if address is missing', async () => {
+            //Arrange
+            const tenantData = {
+                name: 'Tenant Name',
+                address: '',
+            }
+            //Act
+            const response = await request(app)
+                .post('/tenants')
+                .set('Cookie', [`accessToken=${adminToken}`])
+                .send(tenantData)
+
+            expect(response.statusCode).toBe(400)
+
+            // Assert that no tenant was created
+            const tenantRepository = connection.getRepository(Tenant)
+            const tenants = await tenantRepository.find()
             expect(tenants).toHaveLength(0)
         })
     })
