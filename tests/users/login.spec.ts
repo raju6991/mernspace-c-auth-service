@@ -5,7 +5,7 @@ import { AppDataSource } from '../../src/config/data-source'
 import { User } from '../../src/entity/User'
 import { Roles } from '../../src/constants'
 import app from '../../src/app'
-import { isJwt } from '../utils'
+import { isJwt, truncateTables } from '../utils'
 
 describe('POST /auth/login', () => {
     let connection: DataSource
@@ -15,9 +15,7 @@ describe('POST /auth/login', () => {
     })
 
     beforeEach(async () => {
-        // Database truncate
-        await connection.dropDatabase()
-        await connection.synchronize()
+        await truncateTables(connection)
     })
     afterAll(async () => {
         await connection.destroy()

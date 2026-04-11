@@ -4,7 +4,7 @@ import { User } from '../../src/entity/User'
 import { Roles } from '../../src/constants'
 import { DataSource } from 'typeorm'
 import { AppDataSource } from '../../src/config/data-source'
-import { isJwt } from '../utils'
+import { isJwt, truncateTables } from '../utils'
 import { RefreshToken } from '../../src/entity/RefreshToken'
 
 describe('POST /auth/register', () => {
@@ -15,9 +15,7 @@ describe('POST /auth/register', () => {
     })
 
     beforeEach(async () => {
-        // Database truncate
-        await connection.dropDatabase()
-        await connection.synchronize()
+        await truncateTables(connection)
     })
     afterAll(async () => {
         await connection.destroy()

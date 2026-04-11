@@ -3,6 +3,7 @@ import cookieParser from 'cookie-parser'
 import logger from './config/logger'
 import { HttpError } from 'http-errors'
 import authRouter from './routes/auth'
+import tenantRouter from './routes/tenant'
 import path from 'path'
 
 const app = express()
@@ -15,6 +16,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/auth', authRouter)
+app.use('/tenants', tenantRouter)
 
 app.use(
     '/.well-known',
