@@ -5,6 +5,7 @@ import { AppDataSource } from '../../src/config/data-source'
 import app from '../../src/app'
 import { User } from '../../src/entity/User'
 import { Roles } from '../../src/constants'
+import { truncateTables } from '../utils'
 
 describe('GET /auth/self', () => {
     let connection: DataSource
@@ -17,11 +18,10 @@ describe('GET /auth/self', () => {
 
     beforeEach(async () => {
         jwks.start()
-        await connection.dropDatabase()
-        await connection.synchronize()
+        await truncateTables(connection)
     })
     afterAll(async () => {
-        await connection.destroy()
+        await AppDataSource.destroy()
     })
 
     afterEach(() => {
