@@ -356,7 +356,7 @@ describe('POST /auth/register', () => {
         it('shoud return an array of error messages if email is missing', async () => {
             // Arrange
             const userData = {
-                firstName: 'Rakesh',
+                firstName: 'Raju',
                 lastName: 'K',
                 email: '',
                 password: 'password',
