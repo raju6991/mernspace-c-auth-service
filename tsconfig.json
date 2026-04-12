@@ -3,7 +3,7 @@
         "target": "es2016",
         "lib": ["es6"],
         "module": "commonjs",
-        "rootDir": ".",
+        "rootDir": "./",
         "outDir": "./dist",
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
@@ -16,10 +16,12 @@
         "ignoreDeprecations": "5.0",
         "types": ["jest", "node"]
     },
+
     //TypeOrm
 
     "emitDecoratorMetaData": true,
     "expeirmentalDecorators": true,
 
-    "include": ["src/**/*.ts", "tests/**/*.ts", "app.spec.ts", "jest.config.ts", "scripts/**/.js"]
+    "include": ["src/**/*.ts", "tests/**/*.ts", "app.spec.ts", "jest.config.ts", "scripts/**/.js"],
+    "exclude": ["**/*.spec.ts", "tests"]
 }
