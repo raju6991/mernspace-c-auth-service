@@ -14,18 +14,17 @@ export default defineConfig(
             'coverage',
             'eslint.config.mjs',
             'scripts',
+            'tests',
         ],
     },
     {
+        files: ['src/**/*.ts'],
         languageOptions: {
+            parser: tseslint.parser,
             parserOptions: {
-                project: true,
-                tsconfigRootDir: import.meta.dirname,
+                ecmaVersion: 2021,
+                sourceType: 'module',
             },
-        },
-        rules: {
-            // 'no-console': 'error',
-            // 'dot-notation': 'error',
         },
     },
 )

@@ -22,7 +22,7 @@
     "emitDecoratorMetaData": true,
     "expeirmentalDecorators": true,
 
-    "include": ["src/**/*.ts", "tests/**/*.ts", "app.spec.ts", "jest.config.ts", "scripts/**/.js"],
+    "include": ["src/**/*.ts", "app.spec.ts", "jest.config.ts", "scripts/**/.js"],
 
-    "exclude": ["dist", "node_modules"]
+    "exclude": ["dist", "node_modules", "tests"]
 }

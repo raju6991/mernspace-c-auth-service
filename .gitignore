@@ -63,8 +63,9 @@ web_modules/
 *.tgz
  certs/
  public/
+ keys.md
 
-# Yarn Integrity file
+ # Yarn Integrity file
 .yarn-integrity
 
 # dotenv environment variable files
