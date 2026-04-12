@@ -1,7 +1,7 @@
-import { Repository } from 'typeorm'
+import { Repository, Brackets } from 'typeorm'
 import bcrypt from 'bcrypt'
 import { User } from '../entity/User'
-import { UserData, LimitedUserData } from '../types'
+import { UserData, LimitedUserData, UserQueryParams } from '../types'
 import createHttpError from 'http-errors'
 
 export class UserService {
@@ -88,5 +88,36 @@ export class UserService {
     }
     async deleteById(userId: number) {
         return await this.userRepository.delete(userId)
+    }
+
+    async getAll(validatedQuery: UserQueryParams) {
+        const queryBuilder = this.userRepository
+            .createQueryBuilder('user')
+            .leftJoinAndSelect('user.tenant', 'tenant')
+
+        if (validatedQuery.q) {
+            const searchTerm = `%${validatedQuery.q}%`
+            queryBuilder.where(
+                new Brackets((qb) => {
+                    qb.where('user.firstName ILIKE :q', { q: searchTerm })
+                        .orWhere('user.lastName ILIKE :q', { q: searchTerm })
+                        .orWhere('user.email ILIKE :q', { q: searchTerm })
+                }),
+            )
+        }
+
+        if (validatedQuery.role) {
+            queryBuilder.andWhere('user.role = :role', {
+                role: validatedQuery.role,
+            })
+        }
+
+        const result = await queryBuilder
+            .skip((validatedQuery.currentPage - 1) * validatedQuery.perPage)
+            .take(validatedQuery.perPage)
+            .orderBy('user.id', 'DESC')
+            .getManyAndCount()
+
+        return result
     }
 }

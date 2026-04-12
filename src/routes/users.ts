@@ -8,6 +8,8 @@ import authenticate from '../middlewares/authenticate'
 import { canAccess } from '../middlewares/canAccess'
 import { Roles } from '../constants'
 import userValidator from '../validator/user-validator'
+import listUserValidator from '../validator/list-user-validator'
+import updateUserValidator from '../validator/update-user-validator'
 
 const router = express.Router()
 
@@ -22,6 +24,40 @@ router.post(
     userValidator,
     (req: Request, res: Response, next: NextFunction) =>
         userController.create(req, res, next),
+)
+
+router.get(
+    '/:id',
+    authenticate,
+    canAccess([Roles.ADMIN]),
+    (req: Request, res: Response, next: NextFunction) =>
+        userController.getById(req, res, next),
+)
+
+router.get(
+    '/',
+    authenticate,
+    canAccess([Roles.ADMIN]),
+    listUserValidator,
+    (req: Request, res: Response, next: NextFunction) =>
+        userController.getAll(req, res, next),
+)
+
+router.put(
+    '/:id',
+    authenticate,
+    canAccess([Roles.ADMIN]),
+    updateUserValidator,
+    (req: Request, res: Response, next: NextFunction) =>
+        userController.update(req, res, next),
+)
+
+router.delete(
+    '/:id',
+    authenticate,
+    canAccess([Roles.ADMIN]),
+    (req: Request, res: Response, next: NextFunction) =>
+        userController.destroy(req, res, next),
 )
 
 export default router
