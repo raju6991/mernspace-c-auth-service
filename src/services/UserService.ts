@@ -5,7 +5,7 @@ import { UserData, LimitedUserData, UserQueryParams } from '../types'
 import createHttpError from 'http-errors'
 
 export class UserService {
-    constructor(private userRepository: Repository<User>) {}
+    constructor(private readonly userRepository: Repository<User>) {}
     async create({
         firstName,
         lastName,

@@ -1,4 +1,4 @@
-import fs from 'fs'
+import fs from 'node:fs'
 import rsaPemToJwk from 'rsa-pem-to-jwk'
 
 const privateKey = fs.readFileSync('./certs/private.pem')

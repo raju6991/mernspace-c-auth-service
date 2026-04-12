@@ -1,5 +1,5 @@
 // Import the child_process module
-const { exec } = require('child_process')
+const { exec } = require('node:child_process')
 
 // Function to run the migration command
 function runMigration() {

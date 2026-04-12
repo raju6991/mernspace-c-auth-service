@@ -14,7 +14,7 @@ export default checkSchema(
             customSanitizer: {
                 options: (value) => {
                     const parsedValue = Number(value)
-                    return Number.isNaN(parsedValue) ? 1 : parsedValue
+                    return Number(parsedValue) || 1
                 },
             },
         },
@@ -22,7 +22,7 @@ export default checkSchema(
             customSanitizer: {
                 options: (value) => {
                     const parsedValue = Number(value)
-                    return Number.isNaN(parsedValue) ? 10 : parsedValue
+                    return Number(parsedValue) || 10
                 },
             },
         },

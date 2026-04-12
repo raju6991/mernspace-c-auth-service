@@ -5,7 +5,7 @@ import { HttpError } from 'http-errors'
 import authRouter from './routes/auth'
 import tenantRouter from './routes/tenant'
 import userRouter from './routes/users'
-import path from 'path'
+import path from 'node:path'
 
 const app = express()
 app.use(express.static(path.join(__dirname, '../../public')))

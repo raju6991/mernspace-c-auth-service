@@ -7,8 +7,8 @@ import createHttpError from 'http-errors'
 
 export class UserController {
     constructor(
-        private userService: UserService,
-        private logger: Logger,
+        private readonly userService: UserService,
+        private readonly logger: Logger,
     ) {}
 
     async create(req: CreateUserRequest, res: Response, next: NextFunction) {
@@ -40,7 +40,7 @@ export class UserController {
     async getById(req: Request, res: Response, next: NextFunction) {
         const userId = req.params.id as string
 
-        if (isNaN(Number(userId))) {
+        if (Number(isNaN(Number(userId)))) {
             next(createHttpError(400, 'Invalid url param.'))
             return
         }
@@ -79,7 +79,7 @@ export class UserController {
     async update(req: UpdateUserRequest, res: Response, next: NextFunction) {
         const userId = req.params.id as string
 
-        if (isNaN(Number(userId))) {
+        if (Number(isNaN(Number(userId)))) {
             next(createHttpError(400, 'Invalid url param.'))
             return
         }
@@ -111,7 +111,7 @@ export class UserController {
     async destroy(req: Request, res: Response, next: NextFunction) {
         const userId = req.params.id as string
 
-        if (isNaN(Number(userId))) {
+        if (Number(isNaN(Number(userId)))) {
             next(createHttpError(400, 'Invalid url param.'))
             return
         }
