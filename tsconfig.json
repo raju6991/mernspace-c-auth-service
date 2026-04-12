@@ -23,5 +23,4 @@
     "expeirmentalDecorators": true,
 
     "include": ["src/**/*.ts", "tests/**/*.ts", "app.spec.ts", "jest.config.ts", "scripts/**/.js"],
-    "exclude": ["**/*.spec.ts", "tests"]
 }
