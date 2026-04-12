@@ -61,11 +61,13 @@ web_modules/
 
 # Output of 'npm pack'
 *.tgz
- certs/
- public/
- keys.md
 
- # Yarn Integrity file
+# Certificates and keys
+certs/
+public/
+keys.md
+
+# Yarn Integrity file
 .yarn-integrity
 
 # dotenv environment variable files
