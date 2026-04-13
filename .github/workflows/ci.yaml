@@ -10,6 +10,20 @@ jobs:
     build-and-test:
         name: Build the project
         runs-on: ubuntu-latest
+        services:
+            postgres:
+                image: postgres:latest
+                env:
+                    POSTGRES_USER: root
+                    POSTGRES_PASSWORD: root
+                    POSTGRES_DB: mernstack_auth_service_test
+                options: >-
+                    --health-cmd pg_isready
+                    --health-interval 10s
+                    --health-timeout 5s
+                    --health-retries 5
+                ports:
+                    - 5432:5432
         # if: github.event_name == 'pull_request'
         steps:
             - uses: actions/checkout@v3
@@ -20,11 +34,11 @@ jobs:
             - name: Test and coverage
               run: npm run test
               env:
-                  DB_HOST: ${{ secrets.TEST_DB_HOST }}
-                  DB_PORT: ${{ secrets.TEST_DB_PORT }}
-                  DB_USERNAME: ${{ secrets.TEST_DB_USERNAME }}
-                  DB_PASSWORD: ${{ secrets.TEST_DB_PASSWORD }}
-                  DB_NAME: ${{ secrets.TEST_DB_NAME }}
+                  DB_HOST: localhost
+                  DB_PORT: 5432
+                  DB_USERNAME: root
+                  DB_PASSWORD: root
+                  DB_NAME: mernstack_auth_service_test
                   REFRESH_TOKEN_SECRET: ${{ secrets.REFRESH_TOKEN_SECRET }}
                   JWKS_URI: ${{ secrets.JWKS_URI }}
                   PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
@@ -38,7 +52,7 @@ jobs:
 
     build-and-push-docker:
         name: Build and Push Docker Image
-        # needs: build-and-test
+        needs: build-and-test
         runs-on: ubuntu-latest
         env:
             IMAGE_NAME: razusoft/mernspace-c-auth-service # codersgyan/mernstack_auth_service:build-2
