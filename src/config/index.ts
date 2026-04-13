@@ -40,4 +40,17 @@ export const Config = {
     get PRIVATE_KEY() {
         return getEnv('PRIVATE_KEY')
     },
+
+    get ADMIN_EMAIL() {
+        return getEnv('ADMIN_EMAIL')
+    },
+    get ADMIN_PASSWORD() {
+        return getEnv('ADMIN_PASSWORD')
+    },
+    get ADMIN_FIRST_NAME() {
+        return getEnv('ADMIN_FIRST_NAME')
+    },
+    get ADMIN_LAST_NAME() {
+        return getEnv('ADMIN_LAST_NAME')
+    },
 }
