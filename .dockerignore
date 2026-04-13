@@ -1,3 +1,25 @@
+# Dependencies
 node_modules
 npm-debug.log
+
+# Environment/Secrets
 .env
+.env.*
+!.env.example
+
+# Build/Dist folders
+dist
+build
+.swc
+
+# Version Control
+.git
+.gitignore
+
+# Docker specific
+Dockerfile
+.dockerignore
+
+# OS metadata
+.DS_Store
+Thumbs.db
