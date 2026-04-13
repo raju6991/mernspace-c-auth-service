@@ -1,5 +1,5 @@
 import request from 'supertest'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import createJWKSMock from 'mock-jwks'
 import { DataSource } from 'typeorm'
 import { AppDataSource } from '../../src/config/data-source'
@@ -26,7 +26,6 @@ describe('POST /auth/logout', () => {
     afterEach(() => {
         jwks.stop()
     })
-
     afterAll(async () => {
         await AppDataSource.destroy()
     })
