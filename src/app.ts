@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express'
 import cookieParser from 'cookie-parser'
+import cors from 'cors'
 import logger from './config/logger'
 import { HttpError } from 'http-errors'
 import authRouter from './routes/auth'
@@ -8,6 +9,12 @@ import userRouter from './routes/users'
 import path from 'node:path'
 
 const app = express()
+app.use(
+    cors({
+        origin: ['http://localhost:5174'],
+        credentials: true,
+    }),
+)
 app.use(express.static(path.join(__dirname, '../../public')))
 app.use(cookieParser())
 app.use(express.json())
