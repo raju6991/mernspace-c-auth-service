@@ -1,8 +1,8 @@
 import { Logger } from 'winston'
 import { UserService } from '../services/UserService'
 import { Response, NextFunction, Request } from 'express'
-import { CreateUserRequest, UpdateUserRequest } from '../types'
-import { validationResult } from 'express-validator'
+import { CreateUserRequest, UpdateUserRequest, UserQueryParams } from '../types'
+import { matchedData, validationResult } from 'express-validator'
 import createHttpError from 'http-errors'
 
 export class UserController {
@@ -60,17 +60,19 @@ export class UserController {
     }
 
     async getAll(req: Request, res: Response, next: NextFunction) {
+        const validatedQuery = matchedData(res, { onlyValidData: true })
+
         try {
-            const queryParams = req.query
-            const [users, total] = await this.userService.getAll({
-                q: (queryParams.q as string) || '',
-                role: (queryParams.role as string) || '',
-                perPage: queryParams.perPage ? Number(queryParams.perPage) : 10,
-                currentPage: queryParams.currentPage
-                    ? Number(queryParams.currentPage)
-                    : 1,
+            const [users, count] = await this.userService.getAll(
+                validatedQuery as UserQueryParams,
+            )
+            this.logger.info('All users have been feteched')
+            res.json({
+                currentPage: validatedQuery.currentPage as number,
+                perPage: validatedQuery.perPage,
+                total: count,
+                data: users,
             })
-            res.json({ users, total })
         } catch (err) {
             next(err)
         }
