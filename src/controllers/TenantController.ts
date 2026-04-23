@@ -30,10 +30,14 @@ export class TenantController {
     async getAll(req: Request, res: Response, next: NextFunction) {
         const validateQuery = matchedData(req, { onlyValidData: true })
 
+        const query: TenantQueryParams = {
+            perPage: Number(validateQuery.perPage),
+            currentPage: Number(validateQuery.currentPage),
+            q: (validateQuery.q as string) || '',
+        }
+
         try {
-            const [tenants] = await this.tenantService.getAll(
-                validateQuery as TenantQueryParams,
-            )
+            const [tenants] = await this.tenantService.getAll(query)
             this.logger.info('All tenant have been fetched!')
             res.json(tenants)
         } catch (err) {

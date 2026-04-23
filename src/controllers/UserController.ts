@@ -60,12 +60,17 @@ export class UserController {
     }
 
     async getAll(req: Request, res: Response, next: NextFunction) {
-        const validatedQuery = matchedData(res, { onlyValidData: true })
+        const validatedQuery = matchedData(req, { onlyValidData: true })
+
+        const query: UserQueryParams = {
+            perPage: Number(validatedQuery.perPage),
+            currentPage: Number(validatedQuery.currentPage),
+            q: (validatedQuery.q as string) || '',
+            role: (validatedQuery.role as string) || '',
+        }
 
         try {
-            const [users, count] = await this.userService.getAll(
-                validatedQuery as UserQueryParams,
-            )
+            const [users, count] = await this.userService.getAll(query)
             this.logger.info('All users have been feteched')
             res.json({
                 currentPage: validatedQuery.currentPage as number,
