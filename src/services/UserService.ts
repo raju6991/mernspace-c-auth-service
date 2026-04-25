@@ -116,11 +116,12 @@ export class UserService {
         }
 
         const result = await queryBuilder
+            .leftJoinAndSelect('user.tenant', 'tenants')
             .skip((validatedQuery.currentPage - 1) * validatedQuery.perPage)
             .take(validatedQuery.perPage)
             .orderBy('user.id', 'DESC')
             .getManyAndCount()
-
+        console.log('query', queryBuilder.getSql())
         return result
     }
 }
